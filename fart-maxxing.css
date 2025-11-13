@@ -208,4 +208,34 @@
 
 @keyframes rumble {
     0%, 100% { transform: translateY(0); }
-    50% {
+    50% { transform: translateY(-2px); }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .intake-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .fart-maxxing-section {
+        padding: 20px;
+    }
+    
+    .fart-maxxing-section h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .daily-intake-container {
+        padding: 15px;
+    }
+    
+    .food-items li {
+        font-size: 0.85rem;
+    }
+    
+    .category-title {
+        font-size: 1.1rem;
+    }
+}
