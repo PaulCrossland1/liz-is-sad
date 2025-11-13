@@ -1,0 +1,200 @@
+/* Memory Game CSS for Liz's Website 🎮 */
+
+.memory-game-section {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.memory-game-section h3 {
+    color: #2d3436;
+    margin-bottom: 15px;
+    font-size: 1.7rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.game-container {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.card.flipped {
+    background: white;
+    border: 2px solid #4ecdc4;
+    cursor: default;
+}
+
+.card.matched {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    border: 2px solid #ffd700;
+    cursor: default;
+    animation: matchCelebration 0.6s ease-in-out;
+}
+
+@keyframes matchCelebration {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.score-display {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #2d3436;
+    min-width: 100px;
+}
+
+.reset-btn {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+}
+
+.game-instructions {
+    color: #2d3436;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .memory-game-section {
+        padding: 20px;
+    }
+    
+    .game-grid {
+        max-width: 280px;
+        gap: 6px;
+    }
+    
+    .card {
+        font-size: 1.8rem;
+    }
+    
+    .game-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-game-section h3 {
+        font-size: 1.4rem;
+    }
+    
+    .game-grid {
+        max-width: 250px;
+        gap: 5px;
+    }
+    
+    .card {
+        font-size: 1.5rem;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .score-display {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .reset-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .game-grid {
+        max-width: 220px;
+        gap: 4px;
+    }
+    
+    .card {
+        font-size: 1.3rem;
+    }
+}
+
+/* Celebrate completion animation */
+@keyframes celebration {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.05) rotate(2deg); }
+    50% { transform: scale(1.1) rotate(-2deg); }
+    75% { transform: scale(1.05) rotate(1deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.celebration {
+    animation: celebration 0.8s ease-in-out;
+}
+
+/* Touch-friendly improvements */
+.card {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card:active {
+    transform: scale(0.95);
+}

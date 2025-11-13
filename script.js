@@ -203,3 +203,214 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Memory Game Implementation 🎮
+class MemoryGame {
+    constructor() {
+        this.gridElement = document.getElementById('game-grid');
+        this.movesCounter = document.getElementById('moves-count');
+        this.pairsFoundElement = document.getElementById('pairs-found');
+        this.resetButton = document.getElementById('reset-game-btn');
+        
+        // Fun, positive emojis for Liz!
+        this.emojis = ['🌸', '🌈', '🌟', '🌺', '🦋', '🌞', '🦄', '🎉'];
+        this.cards = [];
+        this.flippedCards = [];
+        this.matchedPairs = 0;
+        this.moves = 0;
+        this.isProcessing = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.createCards();
+        this.shuffleCards();
+        this.renderCards();
+        this.attachEventListeners();
+    }
+    
+    createCards() {
+        // Create pairs for each emoji
+        this.cards = [];
+        this.emojis.forEach(emoji => {
+            this.cards.push({ id: emoji, emoji: emoji, isFlipped: false, isMatched: false });
+            this.cards.push({ id: emoji, emoji: emoji, isFlipped: false, isMatched: false });
+        });
+    }
+    
+    shuffleCards() {
+        // Fisher-Yates shuffle algorithm
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
+    }
+    
+    renderCards() {
+        this.gridElement.innerHTML = '';
+        this.cards.forEach((card, index) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.dataset.index = index;
+            
+            if (card.isFlipped || card.isMatched) {
+                cardElement.textContent = card.emoji;
+                cardElement.classList.add('flipped');
+            } else {
+                cardElement.textContent = '?';
+            }
+            
+            if (card.isMatched) {
+                cardElement.classList.add('matched');
+            }
+            
+            this.gridElement.appendChild(cardElement);
+        });
+    }
+    
+    attachEventListeners() {
+        this.gridElement.addEventListener('click', (e) => this.handleCardClick(e));
+        this.resetButton.addEventListener('click', () => this.resetGame());
+        
+        // Add keyboard support for accessibility
+        this.gridElement.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const target = e.target.closest('.card');
+                if (target) this.handleCardClick({ target });
+            }
+        });
+    }
+    
+    handleCardClick(e) {
+        const cardElement = e.target;
+        if (cardElement.classList.contains('card') && !cardElement.classList.contains('flipped') && !this.isProcessing) {
+            const index = parseInt(cardElement.dataset.index);
+            this.flipCard(index);
+        }
+    }
+    
+    flipCard(index) {
+        const card = this.cards[index];
+        if (card.isFlipped || card.isMatched) return;
+        
+        card.isFlipped = true;
+        this.flippedCards.push(index);
+        this.moves++;
+        this.updateDisplay();
+        
+        this.renderCards();
+        
+        if (this.flippedCards.length === 2) {
+            this.isProcessing = true;
+            setTimeout(() => this.checkForMatch(), 600);
+        }
+    }
+    
+    checkForMatch() {
+        const [index1, index2] = this.flippedCards;
+        const card1 = this.cards[index1];
+        const card2 = this.cards[index2];
+        
+        if (card1.id === card2.id) {
+            // Match found!
+            card1.isMatched = true;
+            card2.isMatched = true;
+            this.matchedPairs++;
+            
+            // Add celebration animation
+            const cardElements = document.querySelectorAll('.card');
+            cardElements[index1].classList.add('celebration');
+            cardElements[index2].classList.add('celebration');
+            
+            if (this.matchedPairs === 8) {
+                setTimeout(() => this.celebrateWin(), 500);
+            }
+        } else {
+            // No match
+            card1.isFlipped = false;
+            card2.isFlipped = false;
+        }
+        
+        this.flippedCards = [];
+        this.isProcessing = false;
+        this.renderCards();
+    }
+    
+    updateDisplay() {
+        this.movesCounter.textContent = this.moves;
+        this.pairsFoundElement.textContent = this.matchedPairs;
+    }
+    
+    celebrateWin() {
+        // Create confetti effect
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => this.createConfetti(), i * 50);
+        }
+        
+        // Show win message
+        setTimeout(() => {
+            alert(`🎉 AMAZING JOB LIZ! 🎉\nYou completed the game in ${this.moves} moves!\nYou're an emoji matching superstar! ✨`);
+        }, 500);
+    }
+    
+    createConfetti() {
+        const confetti = document.createElement('div');
+        confetti.innerHTML = ['🎊', '🎈', '✨', '🌟', '💖'][Math.floor(Math.random() * 5)];
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-50px';
+        confetti.style.fontSize = '24px';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.animation = 'fall 3s ease-out forwards';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 3000);
+    }
+    
+    resetGame() {
+        this.matchedPairs = 0;
+        this.moves = 0;
+        this.flippedCards = [];
+        this.isProcessing = false;
+        this.createCards();
+        this.shuffleCards();
+        this.updateDisplay();
+        this.renderCards();
+    }
+}
+
+// Enhanced mobile touch support
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize memory game
+    const memoryGame = new MemoryGame();
+    
+    // Add CSS for confetti animation
+    const confettiStyle = document.createElement('style');
+    confettiStyle.textContent = `
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(confettiStyle);
+    
+    // Make cards more touch-friendly for mobile
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        @media (hover: none) {
+            .card {
+                min-height: 50px;
+            }
+            .card:active {
+                transform: scale(0.95);
+            }
+        }
+    `;
+    document.head.appendChild(styleElement);
+});
