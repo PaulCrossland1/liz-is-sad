@@ -1,0 +1,211 @@
+/* Daily Intake Fart Maxxing CSS - Celebrating healthy guts! 🌈💨 */
+
+.fart-maxxing-section {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%), 
+                radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(173, 216, 230, 0.3) 0%, transparent 50%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.fart-maxxing-section::before {
+    content: '💨';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: float-gentle 4s ease-in-out infinite;
+}
+
+.fart-maxxing-section::after {
+    content: '🌪️';
+    position: absolute;
+    bottom: 15px;
+    left: 25px;
+    font-size: 1.5rem;
+    opacity: 0.2;
+    animation: float-gentle 5s ease-in-out infinite reverse;
+}
+
+@keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.fart-maxxing-section h3 {
+    color: #2d3436;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+}
+
+.fart-maxxing-section h3::before,
+.fart-maxxing-section h3::after {
+    content: '🌟';
+    position: absolute;
+    font-size: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+}
+
+.fart-maxxing-section h3::before { left: -25px; }
+.fart-maxxing-section h3::after { right: -25px; }
+
+.daily-intake-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    position: relative;
+}
+
+.intake-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.meal-category {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.meal-category:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.meal-category.fermentation {
+    background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+}
+
+.meal-category.fiber-blast {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.meal-category.gas-inducing {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+}
+
+.meal-category.probiotic-power {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.category-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #2d3436;
+    text-align: center;
+}
+
+.food-items {
+    list-style: none;
+    padding: 0;
+}
+
+.food-items li {
+    background: rgba(255, 255, 255, 0.8);
+    margin: 8px 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.food-items li:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.02);
+}
+
+.food-items li .serving {
+    font-size: 0.8rem;
+    color: #636e72;
+    font-weight: bold;
+}
+
+.benefits-display {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.benefits-display h4 {
+    color: #2d3436;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.benefits-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.benefits-list span {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    color: #2d3436;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.gas-intensity {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.gas-intensity h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #2d3436;
+}
+
+.intensity-scale {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.intensity-scale span {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.intensity-scale .inactive { opacity: 0.3; }
+.intensity-scale .active { 
+    opacity: 1; 
+    animation: rumble 2s ease-in-out infinite;
+}
+
+@keyframes rumble {
+    0%, 100% { transform: translateY(0); }
+    50% {
